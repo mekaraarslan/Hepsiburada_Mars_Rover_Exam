@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hepsiburada_Mars_Rover_Exam.APP", "Hepsiburada_Mars_Rover_Exam.APP\Hepsiburada_Mars_Rover_Exam.APP.csproj", "{56CF9476-8043-479D-88CD-9EC60C710878}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hepsiburada_Mars_Rover_Exam.TEST", "Hepsiburada_Mars_Rover_Exam.TEST\Hepsiburada_Mars_Rover_Exam.TEST.csproj", "{38F9BAAF-F867-4A07-BB5C-9855A5B5D055}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56CF9476-8043-479D-88CD-9EC60C710878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56CF9476-8043-479D-88CD-9EC60C710878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56CF9476-8043-479D-88CD-9EC60C710878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56CF9476-8043-479D-88CD-9EC60C710878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38F9BAAF-F867-4A07-BB5C-9855A5B5D055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F9BAAF-F867-4A07-BB5C-9855A5B5D055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F9BAAF-F867-4A07-BB5C-9855A5B5D055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F9BAAF-F867-4A07-BB5C-9855A5B5D055}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EB7B6B9-F68F-431F-9D6D-991D33BE77B1}
+	EndGlobalSection
+EndGlobal
