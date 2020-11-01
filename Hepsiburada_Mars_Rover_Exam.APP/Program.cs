@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hepsiburada_Mars_Rover_Exam.APP.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new TripPlanningForm());
         }
     }
 }
