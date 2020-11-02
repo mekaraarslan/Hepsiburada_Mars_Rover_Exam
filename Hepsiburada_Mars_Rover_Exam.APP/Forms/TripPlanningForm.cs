@@ -131,7 +131,26 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
 
         private void TripPlanningForm_Load(object sender, EventArgs e)
         {
-            
+            PlateauGridSizeModel plateauGridSize = new PlateauGridSizeModel()
+            {
+                PlateauHeight = 5,
+                PlateauWidth = 5
+            };
+
+            RoverModel rover = new RoverModel()
+            {
+                RoverNumber = 1,
+                RoverName = "MEKRS",
+                StartingDirection = 'N',
+                StartingCoordinate_X = 1,
+                StartingCoordinate_Y = 2,
+                RedirectCommands = "LMLMLMLMM"
+            };
+
+            StaticValues.PlateauGridSize = plateauGridSize;
+            StaticValues.RoverList.Add(rover);
+            FillRoverList(StaticValues.RoverList);
+
         }
 
         private void btnSendExplore_Click(object sender, EventArgs e)

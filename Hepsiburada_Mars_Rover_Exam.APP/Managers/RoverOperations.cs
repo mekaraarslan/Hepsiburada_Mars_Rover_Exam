@@ -58,7 +58,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
                 return null;
         }
 
-        private void RoverMove(ref string[,] plateauGrid, ref List<string> coordinateHistory, PlateauMaxGridSizeModel plateauMaxGridSize, string roverDirection, string roverText, PlateauGridSizeModel plateauGridSize)
+        public void RoverMove(ref string[,] plateauGrid, ref List<string> coordinateHistory, PlateauMaxGridSizeModel plateauMaxGridSize, string roverDirection, string roverText, PlateauGridSizeModel plateauGridSize)
         {
             int roverCoordinate_X = 0;
             int roverCoordinate_Y = 0;
@@ -104,7 +104,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
 
         }
 
-        private string RoverGetLastCoordinate(string[,] plateauGrid, string roverText, PlateauMaxGridSizeModel plateauMaxGrid)
+        public string RoverGetLastCoordinate(string[,] plateauGrid, string roverText, PlateauMaxGridSizeModel plateauMaxGrid)
         {
             for (int i = 0; i < plateauGrid.GetLength(0); i++)
             {
@@ -122,7 +122,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
             return null;
         }
 
-        private string RotateRover(string direction, string command)
+        public string RotateRover(string direction, string command)
         {
             List<char> rotates = new List<char> { 'S', 'W', 'N', 'E' };
 
@@ -146,7 +146,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
                 return null;
         }
 
-        private void RoverRotateSet(ref string[,] plateauGrid, string roverText, string newRoverText)
+        public void RoverRotateSet(ref string[,] plateauGrid, string roverText, string newRoverText)
         {
             for (int i = 0; i < plateauGrid.GetLength(0); i++)
             {
@@ -163,7 +163,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
             }
         }
 
-        private PlateauMaxGridSizeModel MaxGridSizeCalculate(PlateauGridSizeModel plateauGridSize, RoverModel rover)
+        public PlateauMaxGridSizeModel MaxGridSizeCalculate(PlateauGridSizeModel plateauGridSize, RoverModel rover)
         {
             string direction = rover.StartingDirection.ToString();
             int north = 0, south = 0, east = 0, west = 0;
