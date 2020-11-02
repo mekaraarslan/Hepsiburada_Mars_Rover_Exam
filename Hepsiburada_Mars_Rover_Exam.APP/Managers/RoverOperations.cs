@@ -9,16 +9,19 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
 {
     public class RoverOperations
     {
-        public string PositionRover(PlateauGridSizeModel plateauGridSize, RoverModel rover)
+        public RoverResultModel PositionRover(PlateauGridSizeModel plateauGridSize, RoverModel rover)
         {
             if (plateauGridSize != null && rover != null)
             {
-                // 5-5 bir array için 6-6 değer girilir index numaraları eşit olması amacıyla
-                string[,] plateauGrid = new string[plateauGridSize.PlateauHeight + 1, plateauGridSize.PlateauWidth + 1];
+                var maxGridSize = MaxGridSizeCalculate(plateauGridSize, rover);
+                string[,] plateauGrid =
+                    new string[maxGridSize.South + maxGridSize.North + plateauGridSize.PlateauHeight + 1, maxGridSize.West + maxGridSize.East + plateauGridSize.PlateauWidth + 1];
+                List<string> coordinateHistory = new List<string>();
                 string roverDirection = rover.StartingDirection.ToString();
                 string roverText = rover.RoverNumber + "-" + rover.RoverName + "-" + roverDirection;
 
-                plateauGrid[rover.StartingCoordinate_Y, rover.StartingCoordinate_X] = roverText;
+                coordinateHistory.Add(rover.StartingCoordinate_X + " " + rover.StartingCoordinate_Y + " " + rover.StartingDirection);
+                plateauGrid[rover.StartingCoordinate_Y + maxGridSize.South, rover.StartingCoordinate_X + maxGridSize.West] = roverText;
 
 
                 for (int i = 0; i < rover.RedirectCommands.Length; i++)
@@ -30,7 +33,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
                     }
                     else if (rover.RedirectCommands[i].ToString().Equals("M"))
                     {
-                        RoverMove(ref plateauGrid, roverDirection, roverText);
+                        RoverMove(ref plateauGrid, ref coordinateHistory, maxGridSize, roverDirection, roverText, plateauGridSize);
                     }
                     else if (rover.RedirectCommands[i].ToString().Equals("R"))
                     {
@@ -41,15 +44,21 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
                     roverText = rover.RoverNumber + "-" + rover.RoverName + "-" + roverDirection;
                 }
 
-                string roverLastCoordinate = RoverGetLastCoordinate(plateauGrid, roverText);
+                string roverLastCoordinate = RoverGetLastCoordinate(plateauGrid, roverText, maxGridSize);
 
-                return roverLastCoordinate + " " + roverDirection;
+                return new RoverResultModel()
+                {
+                    LastCoordinate = roverLastCoordinate + " " + roverDirection,
+                    CoordinateHistory = coordinateHistory,
+                    Rover = rover,
+                    PlateauGridSize = plateauGridSize
+                };
             }
             else
                 return null;
         }
 
-        private void RoverMove(ref string[,] plateauGrid, string roverDirection, string roverText)
+        private void RoverMove(ref string[,] plateauGrid, ref List<string> coordinateHistory, PlateauMaxGridSizeModel plateauMaxGridSize, string roverDirection, string roverText, PlateauGridSizeModel plateauGridSize)
         {
             int roverCoordinate_X = 0;
             int roverCoordinate_Y = 0;
@@ -79,11 +88,23 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
             else if (roverDirection.Equals("W"))
                 roverCoordinate_X--;
 
+            string offThePlateau = " - (Off the plateau!)";
+            string coordinate = (roverCoordinate_X - plateauMaxGridSize.West) + " " + (roverCoordinate_Y - plateauMaxGridSize.South).ToString() + " " + roverDirection;
+
+            if (roverCoordinate_Y - plateauMaxGridSize.South <= 0 
+                || roverCoordinate_X - plateauMaxGridSize.West <= 0
+                || roverCoordinate_Y - plateauMaxGridSize.North > plateauGridSize.PlateauHeight
+                || roverCoordinate_X - plateauMaxGridSize.East > plateauGridSize.PlateauWidth)
+            {
+                coordinate += offThePlateau;
+            }
+
+            coordinateHistory.Add(coordinate);
             plateauGrid[roverCoordinate_Y, roverCoordinate_X] = roverText;
 
         }
 
-        private string RoverGetLastCoordinate(string[,] plateauGrid, string roverText)
+        private string RoverGetLastCoordinate(string[,] plateauGrid, string roverText, PlateauMaxGridSizeModel plateauMaxGrid)
         {
             for (int i = 0; i < plateauGrid.GetLength(0); i++)
             {
@@ -93,7 +114,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
                     {
                         if (plateauGrid[i, j].ToString().Equals(roverText))
                         {
-                            return j + " " + i;
+                            return (j - plateauMaxGrid.West).ToString() + " " + (i - plateauMaxGrid.South).ToString();
                         }
                     }
                 }
@@ -142,65 +163,49 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
             }
         }
 
-        private void MaxGridSizeCalculate(PlateauGridSizeModel plateauGridSize, RoverModel rover)
+        private PlateauMaxGridSizeModel MaxGridSizeCalculate(PlateauGridSizeModel plateauGridSize, RoverModel rover)
         {
             string direction = rover.StartingDirection.ToString();
-            int coordinate_Y = 0, coordinate_X = 0;
-            int coordinate_negative_Y = 0, coordinate_negative_X = 0;
+            int north = 0, south = 0, east = 0, west = 0;
 
             for (int i = 0; i < rover.RedirectCommands.Length; i++)
             {
-                if (rover.RedirectCommands[i].Equals("R"))
+                if (rover.RedirectCommands[i].ToString().Equals("R"))
                 {
                     direction = RotateRover(direction, "R");
                 }
-                else if (rover.RedirectCommands[i].Equals("M"))
+                else if (rover.RedirectCommands[i].ToString().Equals("M"))
                 {
-                    if (direction.Equals("N"))
+                    if (direction.Equals("N")) //Y
                     {
-                        if (coordinate_Y >= plateauGridSize.PlateauHeight)
-                        {
-                            coordinate_negative_Y++;
-                        }
-                        else
-                        {
-                            coordinate_Y++;
-                        }
+                        north++;
                     }
-                    else if (direction.Equals("S"))
+                    else if (direction.Equals("S"))  //Y
                     {
-                        coordinate_Y--;
+                        south++;
                     }
-                    else if (direction.Equals("W"))
+                    else if (direction.Equals("W"))  //X
                     {
-                        if (coordinate_X >= plateauGridSize.PlateauWidth)
-                        {
-                            coordinate_negative_X++;
-                        }
-                        else
-                        {
-                            coordinate_X--;
-                        }
-                        
+                        west++;
                     }
-                    else if (direction.Equals("E"))
+                    else if (direction.Equals("E"))  //X
                     {
-                        if (coordinate_X >= plateauGridSize.PlateauWidth)
-                        {
-                            coordinate_negative_X++;
-                        }
-                        else
-                        {
-                            coordinate_X++;
-                        }
+                        east++;
                     }
                 }
-                else if (rover.RedirectCommands[i].Equals("L"))
+                else if (rover.RedirectCommands[i].ToString().Equals("L"))
                 {
                     direction = RotateRover(direction, "L");
                 }
             }
 
+            return new PlateauMaxGridSizeModel()
+            {
+                East = east,
+                North = north,
+                South = south,
+                West = west
+            };
 
         }
 

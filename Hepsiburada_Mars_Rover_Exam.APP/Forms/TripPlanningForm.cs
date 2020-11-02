@@ -99,76 +99,75 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
 
         private void dgvRoverList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            var roverNo = Convert.ToInt32(dgvRoverList.Rows[e.RowIndex].Cells[0].Value);
 
-            DialogResult dialogResult = MessageBox.Show(
-                $"Rover number {roverNo} will be deleted. Do you confirm?", 
-                "Rover delete warning", 
-                MessageBoxButtons.YesNo, 
-                MessageBoxIcon.Warning);
+            string columnName = dgvRoverList.Columns[e.ColumnIndex].Name;
 
-            if (dialogResult == DialogResult.Yes)
+            if (columnName.Equals("roverRemove"))
             {
-                var roverList = StaticValues.RoverList;
-                if (roverList != null)
+                var roverNo = Convert.ToInt32(dgvRoverList.Rows[e.RowIndex].Cells[0].Value);
+
+                DialogResult dialogResult = MessageBox.Show(
+                    $"Rover number {roverNo} will be deleted. Do you confirm?",
+                    "Rover delete warning",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (dialogResult == DialogResult.Yes)
                 {
+                    var roverList = StaticValues.RoverList;
+                    if (roverList != null)
+                    {
 
-                    var roverModel = roverList.Where(x => x.RoverNumber == roverNo).FirstOrDefault();
+                        var roverModel = roverList.Where(x => x.RoverNumber == roverNo).FirstOrDefault();
 
-                    roverList.Remove(roverModel);
-                    StaticValues.RoverList = roverList;
+                        roverList.Remove(roverModel);
+                        StaticValues.RoverList = roverList;
 
-                    FillRoverList(roverList);
+                        FillRoverList(roverList);
+                    }
                 }
             }
         }
 
         private void TripPlanningForm_Load(object sender, EventArgs e)
         {
-            RoverOperations roverOperations = new RoverOperations();
+            
+        }
 
-            PlateauGridSizeModel plateauGridSize = new PlateauGridSizeModel()
+        private void btnSendExplore_Click(object sender, EventArgs e)
+        {
+            bool isWarning = true;
+            StaticValues.RoverResultList.Clear();
+
+            if (dgvRoverList != null)
             {
-                PlateauHeight = 5,
-                PlateauWidth = 5
-            };
+                if (dgvRoverList.Rows.Count > 0)
+                {
+                    isWarning = false;
+                    RoverOperations roverOperations = new RoverOperations();
 
-            RoverModel rover1 = new RoverModel()
+                    if (StaticValues.RoverList != null)
+                    {
+
+                        foreach (var rover in StaticValues.RoverList)
+                        {
+                            RoverResultModel roverResult = roverOperations.PositionRover(StaticValues.PlateauGridSize, rover);
+                            StaticValues.RoverResultList.Add(roverResult);
+                        }
+
+                        RoverResultsForm frmRoverResult = new RoverResultsForm();
+                        frmRoverResult.ShowDialog();
+                    }
+                }
+            }
+
+            if (isWarning)
             {
-                RoverNumber = 1,
-                RoverName = "MEKRS",
-                StartingCoordinate_X = 3,
-                StartingCoordinate_Y = 3,
-                StartingDirection = 'E',
-                RedirectCommands = "MMRMMRMRRM"
-            };
-
-            RoverModel rover2 = new RoverModel()
-            {
-                RoverNumber = 1,
-                RoverName = "MEKRS",
-                StartingCoordinate_X = 1,
-                StartingCoordinate_Y = 2,
-                StartingDirection = 'N',
-                RedirectCommands = "LMLMLMLMM"
-            };
-
-            var result1 = roverOperations.PositionRover(plateauGridSize, rover1);
-            var result2 = roverOperations.PositionRover(plateauGridSize, rover2);
-
-
-            //var a = roverOperations.RotateRover("W", "R");
-            //var aa = roverOperations.RotateRover("W", "L");
-
-            //var b = roverOperations.RotateRover("N", "R");
-            //var bb = roverOperations.RotateRover("N", "L");
-
-            //var c= roverOperations.RotateRover("E", "R");
-            //var cc = roverOperations.RotateRover("E", "L");
-
-            //var d= roverOperations.RotateRover("S", "R");
-            //var dd = roverOperations.RotateRover("S", "L");
-
+                MessageBox.Show("No vehicle to send! Please add rover",
+                        "No rover to send",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+            }
         }
     }
 }

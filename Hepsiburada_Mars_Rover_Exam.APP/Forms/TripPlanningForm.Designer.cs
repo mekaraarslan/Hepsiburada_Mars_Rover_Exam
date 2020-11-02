@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TripPlanningForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.lblHeaderText = new System.Windows.Forms.Label();
             this.pboxMinimizeButton = new System.Windows.Forms.PictureBox();
@@ -53,6 +53,7 @@
             this.roverRemove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnSavePlateauGridSize = new System.Windows.Forms.Button();
             this.pnlSeparatorRoverList = new System.Windows.Forms.Panel();
+            this.btnSendExplore = new System.Windows.Forms.Button();
             this.pnlHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pboxMinimizeButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pboxCloseButton)).BeginInit();
@@ -163,7 +164,7 @@
             this.btnAddRover.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddRover.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnAddRover.ForeColor = System.Drawing.Color.White;
-            this.btnAddRover.Location = new System.Drawing.Point(941, 75);
+            this.btnAddRover.Location = new System.Drawing.Point(684, 71);
             this.btnAddRover.Name = "btnAddRover";
             this.btnAddRover.Size = new System.Drawing.Size(138, 35);
             this.btnAddRover.TabIndex = 6;
@@ -195,14 +196,14 @@
             this.dgvRoverList.AllowUserToDeleteRows = false;
             this.dgvRoverList.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvRoverList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(95)))), ((int)(((byte)(31)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvRoverList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(95)))), ((int)(((byte)(31)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvRoverList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvRoverList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRoverList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.roverNo,
@@ -276,12 +277,12 @@
             // 
             // roverRemove
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Crimson;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.roverRemove.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Crimson;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            this.roverRemove.DefaultCellStyle = dataGridViewCellStyle4;
             this.roverRemove.FillWeight = 80F;
             this.roverRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.roverRemove.HeaderText = "Remove";
@@ -316,12 +317,29 @@
             this.pnlSeparatorRoverList.Size = new System.Drawing.Size(1063, 3);
             this.pnlSeparatorRoverList.TabIndex = 9;
             // 
+            // btnSendExplore
+            // 
+            this.btnSendExplore.BackColor = System.Drawing.Color.Crimson;
+            this.btnSendExplore.FlatAppearance.BorderSize = 0;
+            this.btnSendExplore.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.btnSendExplore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSendExplore.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnSendExplore.ForeColor = System.Drawing.Color.White;
+            this.btnSendExplore.Location = new System.Drawing.Point(897, 71);
+            this.btnSendExplore.Name = "btnSendExplore";
+            this.btnSendExplore.Size = new System.Drawing.Size(182, 35);
+            this.btnSendExplore.TabIndex = 11;
+            this.btnSendExplore.Text = "Send to explore";
+            this.btnSendExplore.UseVisualStyleBackColor = false;
+            this.btnSendExplore.Click += new System.EventHandler(this.btnSendExplore_Click);
+            // 
             // TripPlanningForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1100, 403);
+            this.Controls.Add(this.btnSendExplore);
             this.Controls.Add(this.pnlSeparatorRoverList);
             this.Controls.Add(this.btnSavePlateauGridSize);
             this.Controls.Add(this.dgvRoverList);
@@ -379,5 +397,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn roverStartingCoordinate_y;
         private System.Windows.Forms.DataGridViewTextBoxColumn roverRedirectCommands;
         private System.Windows.Forms.DataGridViewButtonColumn roverRemove;
+        private System.Windows.Forms.Button btnSendExplore;
     }
 }
