@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Hepsiburada_Mars_Rover_Exam.APP.Models;
 using Hepsiburada_Mars_Rover_Exam.APP.Managers;
@@ -50,8 +48,6 @@ namespace Hepsiburada_Mars_Rover_Exam.TEST
             Assert.AreEqual(plateauMaxGridSize_Expected.North, plateauMaxGridSize_Actual.North);
             Assert.AreEqual(plateauMaxGridSize_Expected.West, plateauMaxGridSize_Actual.West);
             Assert.AreEqual(plateauMaxGridSize_Expected.South, plateauMaxGridSize_Actual.South);
-
-
         }
 
         [TestMethod]
@@ -106,7 +102,9 @@ namespace Hepsiburada_Mars_Rover_Exam.TEST
         {
             string[,] plateauGrid = new string[9, 8];
             plateauGrid[3, 2] = "1-MEKRS-W";
+
             List<string> coordinateHistory = new List<string>() { "1 2 N" };
+
             PlateauMaxGridSizeModel plateauMaxGridSize = new PlateauMaxGridSizeModel()
             {
                 East = 1,
@@ -114,11 +112,13 @@ namespace Hepsiburada_Mars_Rover_Exam.TEST
                 South = 1,
                 West = 1
             };
+
             PlateauGridSizeModel plateauGridSize = new PlateauGridSizeModel()
             {
                 PlateauHeight = 5,
                 PlateauWidth = 5
             };
+
             string roverDirection = "W";
             string roverText = "1-MEKRS-W";
 

@@ -2,12 +2,6 @@
 using Hepsiburada_Mars_Rover_Exam.APP.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hepsiburada_Mars_Rover_Exam.APP.Forms

@@ -1,9 +1,5 @@
 ﻿using Hepsiburada_Mars_Rover_Exam.APP.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
 {
@@ -14,15 +10,15 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
             if (plateauGridSize != null && rover != null)
             {
                 var maxGridSize = MaxGridSizeCalculate(plateauGridSize, rover);
-                string[,] plateauGrid =
-                    new string[maxGridSize.South + maxGridSize.North + plateauGridSize.PlateauHeight + 1, maxGridSize.West + maxGridSize.East + plateauGridSize.PlateauWidth + 1];
+
+                string[,] plateauGrid = new string[maxGridSize.South + maxGridSize.North + plateauGridSize.PlateauHeight + 1, maxGridSize.West + maxGridSize.East + plateauGridSize.PlateauWidth + 1];
+
                 List<string> coordinateHistory = new List<string>();
                 string roverDirection = rover.StartingDirection.ToString();
                 string roverText = rover.RoverNumber + "-" + rover.RoverName + "-" + roverDirection;
 
                 coordinateHistory.Add(rover.StartingCoordinate_X + " " + rover.StartingCoordinate_Y + " " + rover.StartingDirection);
                 plateauGrid[rover.StartingCoordinate_Y + maxGridSize.South, rover.StartingCoordinate_X + maxGridSize.West] = roverText;
-
 
                 for (int i = 0; i < rover.RedirectCommands.Length; i++)
                 {
@@ -101,7 +97,6 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Managers
 
             coordinateHistory.Add(coordinate);
             plateauGrid[roverCoordinate_Y, roverCoordinate_X] = roverText;
-
         }
 
         public string RoverGetLastCoordinate(string[,] plateauGrid, string roverText, PlateauMaxGridSizeModel plateauMaxGrid)

@@ -3,12 +3,8 @@ using Hepsiburada_Mars_Rover_Exam.APP.Managers;
 using Hepsiburada_Mars_Rover_Exam.APP.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
@@ -32,10 +28,8 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
 
         private void btnAddRover_Click(object sender, EventArgs e)
         {
-
             if (StaticValues.PlateauGridSize != null)
             {
-
                 AddRoverForm addRoverForm = new AddRoverForm();
                 addRoverForm.ShowDialog();
 
@@ -68,8 +62,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
                     PlateauHeight = plateauHeight
                 };
 
-                MessageBox.Show("OK");
-
+                MessageBox.Show("Plato grid size recorded", "Successful", MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             else
             {
@@ -80,7 +73,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
             }
         }
 
-        private void FillRoverList(List<RoverModel> roverList)
+        public void FillRoverList(List<RoverModel> roverList)
         {
             dgvRoverList.Rows.Clear();
             dgvRoverList.Refresh();
@@ -99,7 +92,6 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
 
         private void dgvRoverList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
             string columnName = dgvRoverList.Columns[e.ColumnIndex].Name;
 
             if (columnName.Equals("roverRemove"))
@@ -129,30 +121,6 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
             }
         }
 
-        private void TripPlanningForm_Load(object sender, EventArgs e)
-        {
-            PlateauGridSizeModel plateauGridSize = new PlateauGridSizeModel()
-            {
-                PlateauHeight = 5,
-                PlateauWidth = 5
-            };
-
-            RoverModel rover = new RoverModel()
-            {
-                RoverNumber = 1,
-                RoverName = "MEKRS",
-                StartingDirection = 'N',
-                StartingCoordinate_X = 1,
-                StartingCoordinate_Y = 2,
-                RedirectCommands = "LMLMLMLMM"
-            };
-
-            StaticValues.PlateauGridSize = plateauGridSize;
-            StaticValues.RoverList.Add(rover);
-            FillRoverList(StaticValues.RoverList);
-
-        }
-
         private void btnSendExplore_Click(object sender, EventArgs e)
         {
             bool isWarning = true;
@@ -167,7 +135,6 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
 
                     if (StaticValues.RoverList != null)
                     {
-
                         foreach (var rover in StaticValues.RoverList)
                         {
                             RoverResultModel roverResult = roverOperations.PositionRover(StaticValues.PlateauGridSize, rover);

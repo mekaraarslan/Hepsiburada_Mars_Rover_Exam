@@ -2,12 +2,8 @@
 using Hepsiburada_Mars_Rover_Exam.APP.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
@@ -18,7 +14,6 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
         {
             InitializeComponent();
         }
-
 
         private void AddRoverForm_Load(object sender, EventArgs e)
         {
@@ -100,7 +95,6 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
                 validationModel.Messages.Add("Please fill in the Reidrect Commands field");
             }
 
-
             if (nudStartingCoordinate_X.Value == 0)
             {
                 validationModel.isValid = false;
@@ -108,6 +102,7 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
             }
 
             var plateauGridSize = StaticValues.PlateauGridSize;
+
             if (nudStartingCoordinate_X.Value > plateauGridSize.PlateauWidth)
             {
                 validationModel.isValid = false;
@@ -128,7 +123,6 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
                     $"Field Starting Coordinate Y cannot exceed grid height (MAX:{plateauGridSize.PlateauHeight})");
             }
 
-            
             if (!rbtnEast.Checked && !rbtnNorth.Checked && !rbtnSouth.Checked && !rbtnWest.Checked)
             {
                 validationModel.isValid = false;
@@ -146,51 +140,33 @@ namespace Hepsiburada_Mars_Rover_Exam.APP.Forms
         private void btnRedirectLeft_Click(object sender, EventArgs e)
         {
             if (txtRedirectCommands.Text.Length > 0)
-            {
                 txtRedirectCommands.Text += "-L";
-            }
             else
-            {
                 txtRedirectCommands.Text += "L";
-            }
-           
         }
 
         private void btnRedirectMove_Click(object sender, EventArgs e)
         {
             if (txtRedirectCommands.Text.Length > 0)
-            {
                 txtRedirectCommands.Text += "-M";
-            }
             else
-            {
                 txtRedirectCommands.Text += "M";
-            }
         }
 
         private void btnRedirectRight_Click(object sender, EventArgs e)
         {
             if (txtRedirectCommands.Text.Length > 0)
-            {
                 txtRedirectCommands.Text += "-R";
-            }
             else
-            {
                 txtRedirectCommands.Text += "R";
-            }
         }
 
         private void btnRedirectBackspace_Click(object sender, EventArgs e)
         {
             if (txtRedirectCommands.Text.Length > 1)
-            {
                 txtRedirectCommands.Text = txtRedirectCommands.Text.Substring(0, txtRedirectCommands.Text.Length - 2);
-            }
             else if (txtRedirectCommands.Text.Length > 0)
-            {
                 txtRedirectCommands.Text = txtRedirectCommands.Text.Substring(0, txtRedirectCommands.Text.Length - 1);
-            }
-           
         }
 
         private void ClearRoverForm()
